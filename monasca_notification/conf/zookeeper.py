@@ -20,7 +20,7 @@ _DEFAULT_URL = '127.0.0.1:2181'
 _DEFAULT_NOTIFICATION_PATH = '/notification/alarms'
 _DEFAULT_RETRY_PATH = '/notification/retry'
 _DEFAULT_PERIODIC_PATH = {
-    60: '/notification/60_seconds'
+    '60': '/notification/60_seconds'
 }
 
 zookeeper_group = cfg.OptGroup('zookeeper',
@@ -44,7 +44,7 @@ zookeeper_opts = [
     cfg.DictOpt(name='periodic_path', default=_DEFAULT_PERIODIC_PATH,
                 required=True, advanced=True,
                 help='Paths in zookeeper tree to track periodic offsets. '
-                     'Keys must be integers describing the interval '
+                     'Keys must be integer strings describing the interval '
                      'of periodic notification. Values are actual '
                      'paths inside zookeeper tree.')
 ]
