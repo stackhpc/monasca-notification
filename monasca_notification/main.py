@@ -108,7 +108,7 @@ def main(argv=None):
         args=(retry_engine.RetryEngine,))
     )
 
-    if 60 in CONF.kafka.periodic:
+    if '60' in CONF.kafka.periodic.keys():
         processors.append(multiprocessing.Process(
             target=start_process,
             args=(periodic_engine.PeriodicEngine, 60))
