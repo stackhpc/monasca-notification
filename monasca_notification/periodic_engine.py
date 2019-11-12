@@ -34,11 +34,11 @@ CONF = cfg.CONF
 
 class PeriodicEngine(object):
     def __init__(self, period):
-        self._topic_name = CONF.kafka.periodic[period]
+        self._topic_name = CONF.kafka.periodic[str(period)]
 
         self._statsd = get_statsd_client()
 
-        zookeeper_path = CONF.zookeeper.periodic_path[period]
+        zookeeper_path = CONF.zookeeper.periodic_path[str(period)]
         self._consumer = consumer.KafkaConsumer(CONF.kafka.url,
                                                 ','.join(CONF.zookeeper.url),
                                                 zookeeper_path,
