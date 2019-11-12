@@ -51,7 +51,7 @@ class PeriodicEngine(object):
         self._db_repo = get_db_repo()
         self._period = period
 
-    def _keep_sending(self, alarm_id, original_state, type, period):
+    def _keep_sending(self, alarm_id, original_state, period):
         try:
             current_state = self._db_repo.get_alarm_current_state(alarm_id)
         except exceptions.DatabaseException:
@@ -66,8 +66,6 @@ class PeriodicEngine(object):
             return False
         # Period changed
         if period != self._period:
-            return False
-        if type != "webhook":
             return False
 
         return True
@@ -85,7 +83,6 @@ class PeriodicEngine(object):
 
             if self._keep_sending(notification.alarm_id,
                                   notification.state,
-                                  notification.type,
                                   notification.period):
 
                 wait_duration = notification.period - (
